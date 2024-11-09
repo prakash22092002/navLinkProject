@@ -1,35 +1,44 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { Link, NavLink, Routes, Route } from "react-router-dom";
+import Home from "./components/home/Home";
+import About from "./components/about/About";
+import Users from "./components/users/User";
+import SingleUser from "./components/singleUser/SingleUser";
+import "./App.css";
 
-function App() {
-  const [count, setCount] = useState(0)
-
+const App = () => {
   return (
     <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
-}
+      <div className="navLinks">
+        <NavLink
+          to={"/"}
+          className={({ isActive }) => (isActive ? "isActive" : "notActive")}
+        >
+          <h2>Home</h2>
+        </NavLink>
+        <NavLink
+          to={"/about"}
+          className={({ isActive }) => (isActive ? "isActive" : "notActive")}
+        >
+          <h2>About</h2>
+        </NavLink>
 
-export default App
+        <NavLink
+          to={"/users"}
+          className={({ isActive }) => (isActive ? "isActive" : "notActive")}
+        >
+          <h2>Users</h2>
+        </NavLink>
+
+      </div>
+
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/about" element={<About />} />
+        <Route path="/users" element={<Users/>} />
+        <Route path="/singleUser/:user_id" element={<SingleUser/>}/>
+      </Routes>
+    </>
+  );
+};
+
+export default App;
